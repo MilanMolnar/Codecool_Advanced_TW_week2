@@ -6,12 +6,8 @@ public abstract class Cd {
     private List<Song> songs;
     private String title;
 
-    public Cd(int limit, List<Song> songs, String title) throws Exception {
-        if (limit <= 82) {
-            this.limit = limit;
-        } else {
-            throw new Exception("Error, CD limit reached. It must be under 83min!");
-        }
+    public Cd(int limit, List<Song> songs, String title){
+        this.limit = limit;
         this.title = title;
         this.songs = songs;
     }
