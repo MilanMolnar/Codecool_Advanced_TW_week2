@@ -7,7 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Enterprise_CD_Player" />
-        <module name="cdplayer" />
+        <module name="Codecool_Advanced_TW_week2-3-4" />
       </profile>
     </annotationProcessing>
   </component>
