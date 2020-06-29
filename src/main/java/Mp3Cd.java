@@ -1,8 +1,8 @@
 import java.util.List;
 
 public class Mp3Cd extends Cd {
-    public Mp3Cd(int limit, List<Song> songs) throws Exception {
-        super(limit, songs);
+    public Mp3Cd(int limit, List<Song> songs,String title) throws Exception {
+        super(limit, songs,title);
     }
 
     @Override

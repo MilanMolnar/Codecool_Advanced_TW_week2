@@ -8,6 +8,7 @@ public class AudioSong extends Song {
 
     @Override
     public int getLength() {
+
         return 0;
     }
 

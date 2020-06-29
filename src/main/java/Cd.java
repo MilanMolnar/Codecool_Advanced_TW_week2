@@ -4,14 +4,15 @@ public abstract class Cd {
 
     private int limit;
     private List<Song> songs;
+    private String title;
 
-    public Cd(int limit, List<Song> songs ) throws Exception {
+    public Cd(int limit, List<Song> songs, String title) throws Exception {
         if (limit <= 700) {
             this.limit = limit;
         } else {
             throw new Exception("Error, CD limit reached. It must be 800MB!");
         }
-
+        this.title = title;
         this.songs = songs;
     }
 

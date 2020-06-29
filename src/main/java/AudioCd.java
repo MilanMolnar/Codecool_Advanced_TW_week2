@@ -3,8 +3,8 @@ import java.util.List;
 
 public class AudioCd extends Cd{
 
-    public AudioCd(int limit, List<Song> songs) throws Exception {
-        super(limit, songs);
+    public AudioCd(int limit, List<Song> songs, String title) throws Exception {
+        super(limit, songs,title);
     }
     @Override
     public void addTrack(Song song) {
