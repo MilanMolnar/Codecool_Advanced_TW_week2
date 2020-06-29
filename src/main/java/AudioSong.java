@@ -1,18 +1,20 @@
 public class AudioSong extends Song {
     private float samplingFrequency;
+    private int length;
 
-    @Override
-    public String getTitle() {
-        return null;
+    public AudioSong(String title,int length) {
+        super(title);
+        this.length = length;
+    }
+
+
+
+    public float getSamplingFrequency() {
+        return samplingFrequency;
     }
 
     @Override
     public int getLength() {
-
-        return 0;
-    }
-
-    public float getSamplingFrequency() {
-        return samplingFrequency;
+        return length;
     }
 }

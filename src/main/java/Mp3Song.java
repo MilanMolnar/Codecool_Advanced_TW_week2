@@ -1,21 +1,15 @@
 public class Mp3Song extends Song{
 
     private int size;
+    private int length;
 
-    public Mp3Song(int size) {
-        this.size = size;
-
-    }
-
-    @Override
-    public String getTitle() {
-
-        return null;
+    public Mp3Song(String title,int length) {
+        super(title);
+        this.length = length;
     }
 
     @Override
     public int getLength() {
-
-        return 0;
+        return length;
     }
 }

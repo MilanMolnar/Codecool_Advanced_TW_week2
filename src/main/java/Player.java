@@ -9,6 +9,8 @@ public class Player {
         this.cd = cd;
     }
 
+    public Player(){}
+
     public void next(){
         NextActivity next = new NextActivity(cw);
         next.activity();
