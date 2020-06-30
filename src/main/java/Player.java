@@ -3,10 +3,12 @@ import java.util.Scanner;
 
 public class Player {
     public ConsoleWriter cw = new ConsoleWriter();
-
     Cd cd;
-    public Player(Cd cd){
+    Playermode pm;
+
+    public Player(Cd cd, Playermode pm){
         this.cd = cd;
+        this.pm = pm;
     }
 
     public Player(){}
@@ -46,7 +48,7 @@ public class Player {
                     back = "b";
                     break;
                 default:
-                    System.out.println("anyádot");
+                    cw.write("Invalid input");
                     break;
             }
         }
@@ -66,7 +68,7 @@ public class Player {
         SetCdActivity setCd = new SetCdActivity(cw,cd);
         setCd.activity();
     }
-    //public void setMode(PlayerMode pm){
-    //    PlayerMode is an enum
-    //}
+    public void setMode(Playermode pm){
+
+    }
 }
