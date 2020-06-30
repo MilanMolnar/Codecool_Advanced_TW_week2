@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -33,9 +36,9 @@ public class Main {
         menu.addItem(listSongsOption);
     }
 
-    public static void choose(List<Song> songList, List<Cd> cdList, Scanner scanner){
+    public static void choose(List<Song> songList, List<Cd> cdList, Scanner scanner, BufferedReader br) throws IOException {
         System.out.println("Please enter an option number: ");
-        String userOption = scanner.nextLine();  // Read user input
+        String userOption = scanner.nextLine();
         if (userOption.equals("1")){
             if (cdList.size() == 0){
                 System.out.println("You have no CDs yet! Please add a CD first!");
@@ -79,7 +82,7 @@ public class Main {
                         System.out.println( song.getTitle() + "\n");
                     }
 
-                    System.out.println("Please choose the songs you want to add to this CD(separate them with comma): ");
+                    System.out.println("\nPlease choose the songs you want to add to this CD(separate them with comma): ");
                     String chosenSongs = scanner.next();
 
                     String[] songArray = chosenSongs.split(",");
@@ -100,7 +103,8 @@ public class Main {
                     if (limitCounter < cdLimit){
                         AudioCd audioCd = new AudioCd(cdLimit,finalSongs,cdName);
                         cdList.add(audioCd);
-                        System.out.println("\nCD created!\n");
+                        System.out.println("CD added successfully. Please press enter to continue...");
+                        br.readLine();
                     } else {
                         System.out.println("Limit was not enough!");
                     }
@@ -119,7 +123,7 @@ public class Main {
                             songList) {
                         System.out.println( song.getTitle() + "\n");
                     }
-                    System.out.println("Please choose the songs you want to add to this CD(separate them with comma): ");
+                    System.out.println("\nPlease choose the songs you want to add to this CD(separate them with comma): ");
 
                     String chosenSongs = scanner.nextLine();
 
@@ -141,7 +145,8 @@ public class Main {
                     if (limitCounter < cdLimit){
                         Mp3Cd mp3cd = new Mp3Cd(cdLimit,finalSongs,cdName);
                         cdList.add(mp3cd);
-                        System.out.println("\nCD created!\n");
+                        System.out.println("CD added successfully. Please press enter to continue...");
+                        br.readLine();
                     } else {
                         System.out.println("Limit was not enough!");
                     }
@@ -161,6 +166,8 @@ public class Main {
 
                 AudioSong audioSong = new AudioSong(songName,length);
                 songList.add(audioSong);
+                System.out.println("Song added successfully. Please press enter to continue...");
+                br.readLine();
             } else if(userOption.equals("MP3Song")){
                 System.out.println("Enter the name of the song: ");
                 String songName = scanner.nextLine();
@@ -170,18 +177,34 @@ public class Main {
 
                 Mp3Song mp3Song = new Mp3Song(songName,length);
                 songList.add(mp3Song);
+                System.out.println("Song added successfully. Please press enter to continue...");
+                br.readLine();
             } else{
                 System.out.println("Error!\n");
             }
         } else if (userOption.equals("4")){
-            for (Cd cd:
-                    cdList) {
-                System.out.println("\nCD name: " + cd.getTitle() + " CD limit: " + cd.getLimit()+ "\n");
+            if (cdList.size() != 0){
+                for (Cd cd:
+                        cdList) {
+                    System.out.println("\nCD name: " + cd.getTitle() + " CD limit: " + cd.getLimit()+ "\n");
+                }
+                System.out.println("\nPlease press enter to continue...");
+                br.readLine();
+            } else {
+                System.out.println("\nYou have no CDs. Please press enter to continue...");
+                br.readLine();
             }
         } else if (userOption.equals("5")) {
-            for (Song song :
-                    songList) {
-                System.out.println("\nSong name: " + song.getTitle() + " Song length: " + song.getLength() + "min.\n");
+            if (songList.size() != 0){
+                for (Song song :
+                        songList) {
+                    System.out.println("\nSong name: " + song.getTitle() + " Song length: " + song.getLength() + "min.\n");
+                }
+                System.out.println("\nPlease press enter to continue...");
+                br.readLine();
+            }else {
+                System.out.println("\nYou have no songs. Please press enter to continue...");
+                br.readLine();
             }
         }
     }
@@ -191,6 +214,8 @@ public class Main {
         List<Song> songList = new ArrayList<Song>();
         List<Cd> cdList = new ArrayList<Cd>();
         Scanner scanner = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
 
         Menu menu = new Menu();
         addOptions(menu);
@@ -198,7 +223,12 @@ public class Main {
         while(true){
             clearScreen();
             menu.show();
-            choose(songList,cdList,scanner);
+            try{
+                choose(songList,cdList,scanner,br);
+            } catch (Exception ec){
+                System.out.println("Something went wrong!");
+            }
+
         }
     }
 }
