@@ -10,6 +10,7 @@ public class Mp3Song extends Song{
 
     @Override
     public int getLength() {
+
         return length;
     }
 }

@@ -10,6 +10,7 @@ public class SetCdActivity implements Activity {
 
     @Override
     public void activity() {
+
         cw.write("The cd is changed to" + cd.getTitle());
     }
 }

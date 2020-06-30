@@ -7,6 +7,7 @@ public class PrevActivity implements Activity {
 
     @Override
     public void activity() {
+
         cw.write("The prev song is coming");
     }
 }
