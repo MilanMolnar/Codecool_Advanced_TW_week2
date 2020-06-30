@@ -50,7 +50,8 @@ public class Main {
                 for (Cd cd:
                         cdList) {
                     if (cd.getTitle().equals(cdName)){
-                        player = new Player(cd);
+                        Playermode pm = Playermode.CD;
+                        player = new Player(cd,pm);
                     }
                 }
                 player.show();
