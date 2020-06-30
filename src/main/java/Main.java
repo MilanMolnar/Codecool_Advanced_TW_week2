@@ -5,6 +5,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 
+    public static void clearScreen() {
+        System. out. print("\033[H\033[2J");
+        System. out. flush();
+    }
+
     public static void addOptions(Menu menu){
         MenuItem playerOption = new MenuItem();
         playerOption.setTitle("1 Player with an existing CD (if you have CDs)");
@@ -191,6 +196,7 @@ public class Main {
         addOptions(menu);
 
         while(true){
+            clearScreen();
             menu.show();
             choose(songList,cdList,scanner);
         }
