@@ -77,7 +77,7 @@ public class Main {
                         cdList) {
                     if (cd.getTitle().equals(cdName)){
                         Playermode pm = Playermode.CD;
-                        player = new Player(cd,pm);
+                        player = new Player(cd,pm,logging,logger);
                     }
                 }
                 player.show();

@@ -1,12 +1,16 @@
 public class StartActivity implements Activity{
-    ConsoleWriter cw = new ConsoleWriter();
+    ConsoleWriter cw;
+    LogWriter log = new LogWriter();
 
     public StartActivity(ConsoleWriter Cw) {
         cw = Cw;
     }
 
     @Override
-    public void activity() {
+    public void activity(Boolean bool) {
         cw.write("The song is started");
+        if(bool){
+            log.write("The song is started");
+        }
     }
 }
