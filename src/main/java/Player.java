@@ -23,7 +23,7 @@ public class Player {
         System.out.println("Welcome to our music player");
         Scanner sc = new Scanner(System.in);
         String back = "";
-        while (back != "b"){
+        while (!back.equals("b")){
             String command = sc.next();
             switch (command){
                 case "start":
@@ -63,7 +63,7 @@ public class Player {
 
     }
     public void setCd(Cd cd){
-        SetCdActivity setCd = new SetCdActivity(cw);
+        SetCdActivity setCd = new SetCdActivity(cw,cd);
         setCd.activity();
     }
     //public void setMode(PlayerMode pm){
