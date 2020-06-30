@@ -27,10 +27,11 @@ public class Player {
         prev.activity(bool);
     }
     public void show(){
-        System.out.println("Welcome to our music player");
+        cw.write("Welcome to our music player");
         Scanner sc = new Scanner(System.in);
         String back = "";
-        while (!back.equals("b")){
+        cw.write("Commands\nstart,stop,next,prev,back");
+        while (true){
             String command = sc.next();
             switch (command){
                 case "start":
@@ -49,9 +50,9 @@ public class Player {
                     setCd(cd);
                     break;
                 case "back":
-                    Main.main(null);
-                    back = "b";
-                    break;
+                    //Main.main(null);
+                    //back = "b";
+                    return;
                 default:
                     cw.write("Invalid input");
                     break;
