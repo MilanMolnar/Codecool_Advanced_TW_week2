@@ -69,6 +69,7 @@ public class Player {
         setCd.activity();
     }
     public void setMode(Playermode pm){
-
+        SetModeActivity setModeActivity = new SetModeActivity(cw,pm);
+        setModeActivity.activity();
     }
 }
