@@ -16,6 +16,7 @@ public class Player {
     public void next(){
         NextActivity next = new NextActivity(cw);
         next.activity();
+
     }
     public void prev(){
         PrevActivity prev = new PrevActivity(cw);

@@ -1,7 +1,10 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -9,8 +12,23 @@ import java.util.concurrent.TimeUnit;
 public class Main {
 
     public static void clearScreen() {
-        System. out. print("\033[H\033[2J");
-        System. out. flush();
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    public static boolean askForLog(Scanner scanner){
+        while (true){
+            System.out.println("\nDo you want to log the input? [yes/no]: \n");
+            String userOption = scanner.nextLine();
+            if (userOption.toLowerCase().equals("yes")){
+                return true;
+            } else if(userOption.toLowerCase().equals("no")){
+                return false;
+            } else{
+                System.out.println("\nWrong answer :c");
+                continue;
+            }
+        }
     }
 
     public static void addOptions(Menu menu){
@@ -36,7 +54,7 @@ public class Main {
         menu.addItem(listSongsOption);
     }
 
-    public static void choose(List<Song> songList, List<Cd> cdList, Scanner scanner, BufferedReader br) throws IOException {
+    public static void choose(List<Song> songList, List<Cd> cdList, Scanner scanner, BufferedReader br, Boolean logging,LogWriter logger, Date date,SimpleDateFormat formatter) throws IOException {
         System.out.println("Please enter an option number: ");
         String userOption = scanner.nextLine();
         if (userOption.equals("1")){
@@ -100,9 +118,12 @@ public class Main {
                         limitCounter += song.getLength();
                     }
 
-                    if (limitCounter < cdLimit){
+                    if (limitCounter <= cdLimit){
                         AudioCd audioCd = new AudioCd(cdLimit,finalSongs,cdName);
                         cdList.add(audioCd);
+                        if (logging){
+                            logger.write("CD added successfully at " + formatter.format(date));
+                        }
                         System.out.println("CD added successfully. Please press enter to continue...");
                         br.readLine();
                     } else {
@@ -145,6 +166,9 @@ public class Main {
                     if (limitCounter < cdLimit){
                         Mp3Cd mp3cd = new Mp3Cd(cdLimit,finalSongs,cdName);
                         cdList.add(mp3cd);
+                        if (logging){
+                            logger.write("CD added successfully at " + formatter.format(date));
+                        }
                         System.out.println("CD added successfully. Please press enter to continue...");
                         br.readLine();
                     } else {
@@ -166,6 +190,9 @@ public class Main {
 
                 AudioSong audioSong = new AudioSong(songName,length);
                 songList.add(audioSong);
+                if (logging){
+                    logger.write("Song added successfully at " + formatter.format(date));
+                }
                 System.out.println("Song added successfully. Please press enter to continue...");
                 br.readLine();
             } else if(userOption.equals("MP3Song")){
@@ -177,12 +204,18 @@ public class Main {
 
                 Mp3Song mp3Song = new Mp3Song(songName,length);
                 songList.add(mp3Song);
+                if (logging){
+                    logger.write("Song added successfully at " + formatter.format(date));
+                }
                 System.out.println("Song added successfully. Please press enter to continue...");
                 br.readLine();
             } else{
                 System.out.println("Error!\n");
             }
         } else if (userOption.equals("4")){
+            if (logging){
+                logger.write("Asked for cds at " + formatter.format(date));
+            }
             if (cdList.size() != 0){
                 for (Cd cd:
                         cdList) {
@@ -195,6 +228,9 @@ public class Main {
                 br.readLine();
             }
         } else if (userOption.equals("5")) {
+            if (logging){
+                logger.write("Asked for songs at " + formatter.format(date));
+            }
             if (songList.size() != 0){
                 for (Song song :
                         songList) {
@@ -210,21 +246,24 @@ public class Main {
     }
 
     public static void main(String[] args){
-
         List<Song> songList = new ArrayList<Song>();
         List<Cd> cdList = new ArrayList<Cd>();
         Scanner scanner = new Scanner(System.in);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-
+        LogWriter logger = new LogWriter();
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Menu menu = new Menu();
+
+        clearScreen();
+        Boolean logging = askForLog(scanner);
         addOptions(menu);
 
         while(true){
             clearScreen();
             menu.show();
             try{
-                choose(songList,cdList,scanner,br);
+                choose(songList,cdList,scanner,br,logging,logger,date,formatter);
             } catch (Exception ec){
                 System.out.println("Something went wrong!");
             }
