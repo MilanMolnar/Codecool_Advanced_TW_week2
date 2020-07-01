@@ -19,6 +19,12 @@ public class Player {
         this.logger=logger;
     }
 
+    public Player(Playermode pm, Boolean bool,Writer logger){
+        this.pm = pm;
+        this.bool = bool;
+        this.logger=logger;
+    }
+
     public Player(){}
 
     public void next(){
@@ -69,7 +75,9 @@ public class Player {
                     prev();
                     break;
                 case "setcd":
-                    setCd(cd);
+                    if (Playermode.SPOTIFY == pm){
+                        setCd(cd);
+                    }
                     break;
                 case "back":
                     //Main.main(null);

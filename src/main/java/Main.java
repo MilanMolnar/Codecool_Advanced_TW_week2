@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static ConsoleWriter cw = new ConsoleWriter();
+
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
@@ -58,7 +59,7 @@ public class Main {
         menu.addItem(spotifySongsOption);
     }
 
-    public static void choose(List<Song> songList, List<Cd> cdList, Scanner scanner, BufferedReader br, Boolean logging,LogWriter logger, Date date,SimpleDateFormat formatter) throws IOException {
+    public static void choose(List<Song> songList, List<Cd> cdList, Scanner scanner, BufferedReader br, Boolean logging,LogWriter logger, Date date,SimpleDateFormat formatter, Boolean isSpotify) throws IOException {
         cw.write("Please enter an option number: ");
         String userOption = scanner.nextLine();
         if (userOption.equals("1")){
@@ -303,15 +304,21 @@ public class Main {
 
         Boolean isSpotify = askForSpotify(scanner);
 
-        while(true){
+        if(isSpotify){
             clearScreen();
-            menu.show();
-            try{
-                choose(songList,cdList,scanner,br,logging,logger,date,formatter);
-            } catch (Exception ec){
-                cw.write("Something went wrong!");
+            Playermode pm = Playermode.SPOTIFY;
+            Player player = new Player(pm,logging,logger);
+            player.show();
+        }else{
+            while(true){
+                clearScreen();
+                menu.show();
+                try{
+                    choose(songList,cdList,scanner,br,logging,logger,date,formatter, isSpotify);
+                } catch (Exception ec){
+                    cw.write("Something went wrong!");
+                }
             }
-
         }
     }
 }
