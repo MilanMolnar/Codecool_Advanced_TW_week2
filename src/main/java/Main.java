@@ -65,6 +65,8 @@ public class Main {
         if (userOption.equals("1")){
             if (cdList.size() == 0){
                 cw.write("You have no CDs yet! Please add a CD first!");
+                cw.write("Please press enter to continue...");
+                br.readLine();
             } else {
                 cw.write("Your CDs: \n");
 
@@ -95,21 +97,23 @@ public class Main {
                 }
             }
         } else if(userOption.equals("2")){
-            cw.write("What kind of CD do you want to add? AudioCD or MP3CD?");
-            userOption = scanner.nextLine();
-            if (userOption.toLowerCase().equals("audiocd")){
-                if (songList.size() == 0){
-                    cw.write(("You have no songs. Please add a song first!"));
-                } else {
+            if (songList.size() == 0){
+                cw.write(("You have no songs. Please add a song first!"));
+                cw.write("Please press enter to continue...");
+                br.readLine();
+            }else {
+                cw.write("What kind of CD do you want to add? AudioCD or MP3CD?");
+                userOption = scanner.nextLine();
+                if (userOption.toLowerCase().equals("audiocd")) {
                     cw.write("Enter the name of the CD: ");
                     String cdName = scanner.nextLine();
 
                     cw.write("Enter the limit of the CD: ");
                     int cdLimit = scanner.nextInt();
 
-                    for (Song song:
+                    for (Song song :
                             songList) {
-                        cw.write( song.getTitle() + "\n");
+                        cw.write(song.getTitle() + "\n");
                     }
 
                     cw.write("\nPlease choose the songs you want to add to this CD(separate them with comma): ");
@@ -119,89 +123,98 @@ public class Main {
                     List<Song> finalSongs = new ArrayList<Song>();
 
                     for (int i = 0; i < songList.size(); i++) {
-                        if (songList.get(i).getTitle().equals(songArray[i])){
-                           if (songList.get(i) instanceof AudioSong){
-                                finalSongs.add(songList.get(i));
-                           } else {
-                                cw.write(songList.get(i).getTitle() + " is not the right type!");
-                                cw.write("Please press enter to continue...");
-                                br.readLine();
-                            }
-
-                        }
-                    }
-
-                    int limitCounter = 0;
-                    for (Song song:
-                            finalSongs) {
-                        limitCounter += song.getLength();
-                    }
-
-                    if (limitCounter <= cdLimit){
-                        AudioCd audioCd = new AudioCd(cdLimit,finalSongs,cdName);
-                        cdList.add(audioCd);
-                        if (logging){
-                            logger.write("CD added successfully at " + formatter.format(date));
-                        }
-                        cw.write("CD added successfully. Please press enter to continue...");
-                        br.readLine();
-                    } else {
-                        cw.write("Limit was not enough!");
-                    }
-                }
-            } else if(userOption.toLowerCase().equals("mp3cd")){
-                if (songList.size() == 0){
-                    cw.write(("You have no songs. Please add a song first!"));
-                } else {
-                    cw.write("Enter the name of the CD: ");
-                    String cdName = scanner.nextLine();
-
-                    cw.write("Enter the limit of the CD: ");
-                    int cdLimit = scanner.nextInt();
-
-                    for (Song song:
-                            songList) {
-                        cw.write( song.getTitle() + "\n");
-                    }
-                    cw.write("\nPlease choose the songs you want to add to this CD(separate them with comma): ");
-
-                    String chosenSongs = scanner.next();
-
-                    String[] songArray = chosenSongs.split(",");
-                    List<Song> finalSongs = new ArrayList<Song>();
-
-                    for (int i = 0; i < songList.size(); i++) {
-                        if (songList.get(i).getTitle().equals(songArray[i])){
-                            if (songList.get(i) instanceof Mp3Song){
+                        if (songList.get(i).getTitle().equals(songArray[i])) {
+                            if (songList.get(i) instanceof AudioSong) {
                                 finalSongs.add(songList.get(i));
                             } else {
                                 cw.write(songList.get(i).getTitle() + " is not the right type!");
                                 cw.write("Please press enter to continue...");
                                 br.readLine();
                             }
+
                         }
                     }
 
                     int limitCounter = 0;
-                    for (Song song:
+                    for (Song song :
                             finalSongs) {
                         limitCounter += song.getLength();
                     }
 
-                    if (limitCounter < cdLimit){
-                        Mp3Cd mp3cd = new Mp3Cd(cdLimit,finalSongs,cdName);
-                        cdList.add(mp3cd);
-                        if (logging){
+                    if (limitCounter <= cdLimit) {
+                        AudioCd audioCd = new AudioCd(cdLimit, finalSongs, cdName);
+                        cdList.add(audioCd);
+                        if (logging) {
                             logger.write("CD added successfully at " + formatter.format(date));
                         }
                         cw.write("CD added successfully. Please press enter to continue...");
                         br.readLine();
                     } else {
                         cw.write("Limit was not enough!");
+                        cw.write("Please press enter to continue...");
+                        br.readLine();
                     }
+
+                } else if (userOption.toLowerCase().equals("mp3cd")) {
+                    if (songList.size() == 0) {
+                        cw.write(("You have no songs. Please add a song first!"));
+                        cw.write("Please press enter to continue...");
+                        br.readLine();
+                    } else {
+                        cw.write("Enter the name of the CD: ");
+                        String cdName = scanner.nextLine();
+
+                        cw.write("Enter the limit of the CD: ");
+                        int cdLimit = scanner.nextInt();
+
+                        for (Song song :
+                                songList) {
+                            cw.write(song.getTitle() + "\n");
+                        }
+                        cw.write("\nPlease choose the songs you want to add to this CD(separate them with comma): ");
+
+                        String chosenSongs = scanner.next();
+
+                        String[] songArray = chosenSongs.split(",");
+                        List<Song> finalSongs = new ArrayList<Song>();
+
+                        for (int i = 0; i < songList.size(); i++) {
+                            if (songList.get(i).getTitle().equals(songArray[i])) {
+                                if (songList.get(i) instanceof Mp3Song) {
+                                    finalSongs.add(songList.get(i));
+                                } else {
+                                    cw.write(songList.get(i).getTitle() + " is not the right type!");
+                                    cw.write("Please press enter to continue...");
+                                    br.readLine();
+                                }
+                            }
+                        }
+
+                        int limitCounter = 0;
+                        for (Song song :
+                                finalSongs) {
+                            limitCounter += song.getLength();
+                        }
+
+                        if (limitCounter < cdLimit) {
+                            Mp3Cd mp3cd = new Mp3Cd(cdLimit, finalSongs, cdName);
+                            cdList.add(mp3cd);
+                            if (logging) {
+                                logger.write("CD added successfully at " + formatter.format(date));
+                            }
+                            cw.write("CD added successfully. Please press enter to continue...");
+                            br.readLine();
+                        } else {
+                            cw.write("Limit was not enough!");
+                            cw.write("Please press enter to continue...");
+                            br.readLine();
+                        }
+                    }
+                } else {
+                    cw.write("Error, wrong input!\n");
+                    cw.write("Please press enter to continue...");
+                    br.readLine();
                 }
-            } else{
-                cw.write("Error!\n");
             }
         } else if(userOption.equals("3")){
             cw.write("What kind of song do you want to add? AudioSong or MP3Song?");
@@ -235,7 +248,9 @@ public class Main {
                 cw.write("Song added successfully. Please press enter to continue...");
                 br.readLine();
             } else{
-                cw.write("Error!\n");
+                cw.write("Error, wrong input!\n");
+                cw.write("Please press enter to continue...");
+                br.readLine();
             }
         } else if (userOption.equals("4")){
             if (logging){

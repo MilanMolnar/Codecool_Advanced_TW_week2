@@ -31,3 +31,8 @@ Asked for songs at 01-07-2020 20:21:01
 Song added successfully at 01-07-2020 20:30:34
 Asked for songs at 01-07-2020 20:30:34
 CD added successfully at 01-07-2020 20:30:34
+Asked for Spotify songs at 01-07-2020 21:14:36
+Song added successfully at 01-07-2020 21:23:00
+Asked for songs at 01-07-2020 21:23:00
+Asked for Spotify songs at 01-07-2020 21:23:00
+Asked for cds at 01-07-2020 21:23:00
