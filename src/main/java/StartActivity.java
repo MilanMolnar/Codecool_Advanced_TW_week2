@@ -1,5 +1,5 @@
 public class StartActivity implements Activity{
-    ConsoleWriter cw;
+    ConsoleWriter cw = new ConsoleWriter();
     LogWriter log = new LogWriter();
 
     public StartActivity(ConsoleWriter Cw) {
