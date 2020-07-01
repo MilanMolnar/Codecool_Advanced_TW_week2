@@ -73,14 +73,21 @@ public class Main {
                 String cdName = scanner.nextLine();
 
                 Player player = new Player();
+                List<String> cdnames = new ArrayList<>();
                 for (Cd cd:
                         cdList) {
-                    if (cd.getTitle().equals(cdName)){
-                        Playermode pm = Playermode.CD;
-                        player = new Player(cd,pm);
+                    cdnames.add(cd.getTitle());
+                    if (cdnames.contains(cdName)){
+                        if (cd.getTitle().equals(cdName)){
+                            Playermode pm = Playermode.CD;
+                            player = new Player(cd,pm,logging,logger);
+                            player.show();
+                        }
+                    } else{
+                        System.out.println("Invalid name. Please press enter to continue...");
+                        br.readLine();
                     }
                 }
-                player.show();
             }
         } else if(userOption.equals("2")){
             System.out.println("What kind of CD do you want to add? AudioCD or MP3CD?");

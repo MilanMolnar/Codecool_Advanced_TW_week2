@@ -1,3 +1,5 @@
 public interface Activity {
-    public void activity();
+    public void activity(Boolean bool);
+
+
 }

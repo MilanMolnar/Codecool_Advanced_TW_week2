@@ -1,7 +1,7 @@
 public class SetCdActivity implements Activity {
     Cd cd;
-    ConsoleWriter cw = new ConsoleWriter();
-
+    ConsoleWriter cw;
+    LogWriter log = new LogWriter();
 
     public SetCdActivity(ConsoleWriter Cw, Cd cd) {
         cw = Cw;
@@ -9,8 +9,11 @@ public class SetCdActivity implements Activity {
     }
 
     @Override
-    public void activity() {
+    public void activity(Boolean bool) {
 
         cw.write("The cd is changed to" + cd.getTitle());
+        if(bool){
+            log.write("The cd is changed to" + cd.getTitle());
+        }
     }
 }
