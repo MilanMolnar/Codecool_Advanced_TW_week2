@@ -7,6 +7,10 @@ public class Player {
     Playermode pm;
     Boolean bool;
     Writer logger;
+    String song;
+    int currentIndex = 0;
+
+
 
     public Player(Cd cd, Playermode pm, Boolean bool,Writer logger){
         this.cd = cd;
@@ -18,12 +22,30 @@ public class Player {
     public Player(){}
 
     public void next(){
-        NextActivity next = new NextActivity(cw);
+        System.out.println("current: " + currentIndex);
+        System.out.println("size: " + cd.getTracks().size() );
+        if(currentIndex == cd.getTracks().size()-1){
+            System.out.println(cd.getTracks().size());
+            currentIndex = 0;
+            song = cd.getTracks().get(currentIndex).getTitle();
+        }else
+        {
+            currentIndex = currentIndex +1;
+            song = cd.getTracks().get(currentIndex).getTitle();
+        }
+        NextActivity next = new NextActivity(cw,song);
         next.activity(bool);
-
     }
     public void prev(){
-        PrevActivity prev = new PrevActivity(cw);
+        if(currentIndex==0){
+            currentIndex = cd.getTracks().size()-1;
+            song = cd.getTracks().get(currentIndex).getTitle();
+        }else
+        {
+            currentIndex = currentIndex +1;
+            song = cd.getTracks().get(currentIndex).getTitle();
+        }
+        PrevActivity prev = new PrevActivity(cw,song);
         prev.activity(bool);
     }
     public void show(){
@@ -64,7 +86,8 @@ public class Player {
         stop.activity(bool);
     }
     public void start(){
-        StartActivity start = new StartActivity(cw);
+        String song = cd.getTracks().get(currentIndex).getTitle();
+        StartActivity start = new StartActivity(cw,song);
         start.activity(bool);
     }
     public void setWriter(Writer logger){
