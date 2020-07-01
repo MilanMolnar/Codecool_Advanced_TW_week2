@@ -49,7 +49,7 @@ public class Main {
         listSongsOption.setTitle("5 Show my songs");
 
         MenuItem spotifySongsOption = new MenuItem();
-        listSongsOption.setTitle("6 Spotify songs");
+        spotifySongsOption.setTitle("6 Spotify songs");
 
         menu.addItem(playerOption);
         menu.addItem(addCdOption);
@@ -97,7 +97,7 @@ public class Main {
         } else if(userOption.equals("2")){
             cw.write("What kind of CD do you want to add? AudioCD or MP3CD?");
             userOption = scanner.nextLine();
-            if (userOption.equals("AudioCD")){
+            if (userOption.toLowerCase().equals("audiocd")){
                 if (songList.size() == 0){
                     cw.write(("You have no songs. Please add a song first!"));
                 } else {
@@ -120,7 +120,14 @@ public class Main {
 
                     for (int i = 0; i < songList.size(); i++) {
                         if (songList.get(i).getTitle().equals(songArray[i])){
-                            finalSongs.add(songList.get(i));
+                           if (songList.get(i) instanceof AudioSong){
+                                finalSongs.add(songList.get(i));
+                           } else {
+                                cw.write(songList.get(i).getTitle() + " is not the right type!");
+                                cw.write("Please press enter to continue...");
+                                br.readLine();
+                            }
+
                         }
                     }
 
@@ -142,7 +149,7 @@ public class Main {
                         cw.write("Limit was not enough!");
                     }
                 }
-            } else if(userOption.equals("MP3CD")){
+            } else if(userOption.toLowerCase().equals("mp3cd")){
                 if (songList.size() == 0){
                     cw.write(("You have no songs. Please add a song first!"));
                 } else {
@@ -158,14 +165,20 @@ public class Main {
                     }
                     cw.write("\nPlease choose the songs you want to add to this CD(separate them with comma): ");
 
-                    String chosenSongs = scanner.nextLine();
+                    String chosenSongs = scanner.next();
 
                     String[] songArray = chosenSongs.split(",");
                     List<Song> finalSongs = new ArrayList<Song>();
 
                     for (int i = 0; i < songList.size(); i++) {
                         if (songList.get(i).getTitle().equals(songArray[i])){
-                            finalSongs.add(songList.get(i));
+                            if (songList.get(i) instanceof Mp3Song){
+                                finalSongs.add(songList.get(i));
+                            } else {
+                                cw.write(songList.get(i).getTitle() + " is not the right type!");
+                                cw.write("Please press enter to continue...");
+                                br.readLine();
+                            }
                         }
                     }
 
@@ -193,7 +206,7 @@ public class Main {
         } else if(userOption.equals("3")){
             cw.write("What kind of song do you want to add? AudioSong or MP3Song?");
             userOption = scanner.nextLine();
-            if (userOption.equals("AudioSong")){
+            if (userOption.toLowerCase().equals("audiosong")){
                 cw.write("Enter the name of the song: ");
                 String songName = scanner.nextLine();
 
@@ -207,7 +220,7 @@ public class Main {
                 }
                 cw.write("Song added successfully. Please press enter to continue...");
                 br.readLine();
-            } else if(userOption.equals("MP3Song")){
+            } else if(userOption.toLowerCase().equals("mp3song")){
                 cw.write("Enter the name of the song: ");
                 String songName = scanner.nextLine();
 

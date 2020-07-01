@@ -8,4 +8,10 @@ public class AudioSong extends Song implements Serializable {
         this.length = length;
     }
 
+    @Override
+    public int getLength() {
+
+        return length;
+    }
+
 }
