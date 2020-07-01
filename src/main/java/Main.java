@@ -256,6 +256,7 @@ public class Main {
             }
         } else if (userOption.equals("6")) {
             SpotifyServer spotify= new SpotifyServer();
+            //alma
             try {
                 if (logging){
                     logger.write("Asked for Spotify songs at " + formatter.format(date));
