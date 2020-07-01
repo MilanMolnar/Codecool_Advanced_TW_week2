@@ -9,11 +9,22 @@ public class NextActivity implements Activity {
         this.song = song;
     }
 
+    public NextActivity(ConsoleWriter cw) {
+        this.cw = cw;
+    }
+
     @Override
     public void activity(Boolean bool) {
-        cw.write("The next " + song + "is coming");
-        if(bool){
-            log.write("The next " + song + "is coming");
+        if(song.isEmpty()) {
+            cw.write("The next " + song + "is coming");
+            if (bool) {
+                log.write("The next " + song + "is coming");
+            }
+        }else{
+            cw.write("The next song is coming");
+            if (bool) {
+                log.write("The next song is coming");
+            }
         }
     }
 }

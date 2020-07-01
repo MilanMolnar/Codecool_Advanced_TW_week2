@@ -39,10 +39,16 @@ public class Player {
             currentIndex = currentIndex +1;
             song = cd.getTracks().get(currentIndex).getTitle();
         }
-        NextActivity next = new NextActivity(cw,song);
-        next.activity(bool);
+        if(Playermode.SPOTIFY == pm){
+            NextActivity next = new NextActivity(cw,song);
+            next.activity(bool);
+        }else{
+            NextActivity next = new NextActivity(cw);
+            next.activity(bool);
+        }
     }
     public void prev(){
+        String song;
         if(currentIndex==0){
             currentIndex = cd.getTracks().size()-1;
             song = cd.getTracks().get(currentIndex).getTitle();
@@ -51,8 +57,14 @@ public class Player {
             currentIndex = currentIndex +1;
             song = cd.getTracks().get(currentIndex).getTitle();
         }
-        PrevActivity prev = new PrevActivity(cw,song);
-        prev.activity(bool);
+        if(Playermode.SPOTIFY == pm){
+            PrevActivity prev = new PrevActivity(cw,song);
+            prev.activity(bool);
+        }else{
+            PrevActivity prev = new PrevActivity(cw);
+            prev.activity(bool);
+        }
+
     }
     public void show(){
         cw.write("Welcome to our music player");
@@ -94,9 +106,17 @@ public class Player {
         stop.activity(bool);
     }
     public void start(){
-        String song = cd.getTracks().get(currentIndex).getTitle();
-        StartActivity start = new StartActivity(cw,song);
-        start.activity(bool);
+        String song;
+        if(Playermode.SPOTIFY == pm){
+            song = cd.getTracks().get(currentIndex).getTitle();
+            StartActivity start = new StartActivity(cw,song);
+            start.activity(bool);
+        }else{
+            StartActivity start = new StartActivity(cw);
+            start.activity(bool);
+        }
+
+
     }
     public void setWriter(Writer logger){
         SetWriterActivity setWriter = new SetWriterActivity(cw,logger);

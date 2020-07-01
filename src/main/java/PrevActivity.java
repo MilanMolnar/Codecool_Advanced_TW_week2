@@ -7,12 +7,22 @@ public class PrevActivity implements Activity {
         this.song = song;
     }
 
+    public PrevActivity(ConsoleWriter Cw) {
+        cw = Cw;
+    }
+
     @Override
     public void activity(Boolean bool) {
-
-        cw.write("The prev "+ song +"is coming");
-        if(bool){
-            log.write("The prev "+ song + "is coming");
+        if(song.isEmpty()) {
+            cw.write("The prev " + song + "is coming");
+            if (bool) {
+                log.write("The prev " + song + "is coming");
+            }
+        }else{
+            cw.write("The prev song is coming");
+            if (bool) {
+                log.write("The prev song is coming");
+            }
         }
     }
 }

@@ -7,12 +7,23 @@ public class StartActivity implements Activity{
         cw = Cw;
         this.song = song;
     }
+    public StartActivity(ConsoleWriter Cw) {
+        cw = Cw;
+    }
 
     @Override
     public void activity(Boolean bool) {
-        cw.write("The " + song + "is started");
-        if(bool){
-            log.write("The " + song + "is started");
+        if(song.isEmpty()){
+            cw.write("The " + song + "is started");
+            if(bool){
+                log.write("The " + song + "is started");
+            }
+        }else {
+            cw.write("The song is started");
+            if(bool){
+                log.write("The song is started");
+            }
         }
+
     }
 }
