@@ -1,5 +1,5 @@
 
-import com.fasterxml.jackson.xml.XmlMapper;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -11,8 +11,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -30,18 +28,15 @@ public class SpotifyServant extends UnicastRemoteObject implements SpotifyServic
     }
 
     @Override
-    public String getSongs(String xml) throws IOException {
+    public List<SpotifySong> getSongs(String xml) throws IOException, ParserConfigurationException, SAXException {
         //xml to json string
-        try{
-            return deserializeFromXML(xml).get(2).getTitle();
-        }catch (Exception ex) {
 
-        }
-        return "fail";
+            return deserializeFromXML(xml);
+
     }
 
-    public List<Song> deserializeFromXML(String xml) throws ParserConfigurationException, IOException, SAXException {
-        List<Song> songs = new ArrayList<>();
+    public List<SpotifySong> deserializeFromXML(String xml) throws ParserConfigurationException, IOException, SAXException {
+        List<SpotifySong> songs = new ArrayList<>();
 
         File xmlFile = new File("songs.xml");
 
@@ -72,9 +67,9 @@ public class SpotifyServant extends UnicastRemoteObject implements SpotifyServic
                 Node node2 = elem.getElementsByTagName("length").item(0);
                 String lname = node2.getTextContent();
 
-                Song song = new Song();
+                SpotifySong song = new SpotifySong();
                 song.setTitle(fname);
-                song.setLength(lname);
+                song.setLength(Integer.parseInt(lname));
                 songs.add(song);
 
             }

@@ -47,11 +47,15 @@ public class Main {
         MenuItem listSongsOption = new MenuItem();
         listSongsOption.setTitle("5 Show my songs");
 
+        MenuItem spotifySongsOption = new MenuItem();
+        listSongsOption.setTitle("6 Spotify songs");
+
         menu.addItem(playerOption);
         menu.addItem(addCdOption);
         menu.addItem(addSongOption);
         menu.addItem(listCDsOption);
         menu.addItem(listSongsOption);
+        menu.addItem(spotifySongsOption);
     }
 
     public static void choose(List<Song> songList, List<Cd> cdList, Scanner scanner, BufferedReader br, Boolean logging,LogWriter logger, Date date,SimpleDateFormat formatter) throws IOException {
@@ -249,6 +253,21 @@ public class Main {
                 System.out.println("\nYou have no songs. Please press enter to continue...");
                 br.readLine();
             }
+        } else if (userOption.equals("6")) {
+            SpotifyServer spotify= new SpotifyServer();
+            try {
+                if (logging){
+                    logger.write("Asked for Spotify songs at " + formatter.format(date));
+                }
+                clearScreen();
+                for (SpotifySong song: spotify.getTrackList()) {
+                    System.out.println("Spotify song: " + song.getTitle() + " length: " + song.getLength());
+                };
+                System.out.println("\nPlease press enter to continue...");
+                br.readLine();
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -263,6 +282,7 @@ public class Main {
         Menu menu = new Menu();
 
         clearScreen();
+
         Boolean logging = askForLog(scanner);
         addOptions(menu);
 

@@ -1,14 +1,10 @@
 import java.io.Serializable;
 
-public abstract class Song implements Serializable {
+public class SpotifySong implements Serializable {
     private String title;
     private int length;
 
-    public Song(){}
-
-    public Song(String title){
-        this.title = title;
-    }
+    public SpotifySong(){}
 
     public String getTitle(){
         return title;
@@ -22,8 +18,7 @@ public abstract class Song implements Serializable {
         this.title = title;
     }
 
-    public void setLength(int len){
-        this.length = len;
+    public void setLength(int length){
+        this.length = length;
     }
-
 }

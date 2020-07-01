@@ -1,14 +1,16 @@
-public class Song {
-    private String title;
-    private String length;
+import java.io.Serializable;
 
-    public Song(){}
+public class SpotifySong implements Serializable {
+    private String title;
+    private int length;
+
+    public SpotifySong(){}
 
     public String getTitle(){
         return title;
     }
 
-    public String getLength(){
+    public int getLength(){
         return length;
     }
 
@@ -16,7 +18,7 @@ public class Song {
         this.title = title;
     }
 
-    public void setLength(String length){
+    public void setLength(int length){
         this.length = length;
     }
 }

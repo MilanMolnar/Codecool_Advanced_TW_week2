@@ -1,5 +1,6 @@
-public class AudioSong extends Song {
-    private float samplingFrequency;
+import java.io.Serializable;
+
+public class AudioSong extends Song implements Serializable {
     private int length;
 
     public AudioSong(String title,int length) {
@@ -7,14 +8,4 @@ public class AudioSong extends Song {
         this.length = length;
     }
 
-
-
-    public float getSamplingFrequency() {
-        return samplingFrequency;
-    }
-
-    @Override
-    public int getLength() {
-        return length;
-    }
 }
