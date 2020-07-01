@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<songs>
+    <song id="1">
+        <title>spotify song 1 xd</title>
+        <length>4</length>
+    </song>
+    <song id="2">
+        <title>spotify song2 xd</title>
+        <length>3</length>
+    </song>
+    <song id="3">
+        <title>spotify song 3 xd</title>
+        <length>2</length>
+    </song>    
+</songs>
