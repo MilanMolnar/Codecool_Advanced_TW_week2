@@ -271,6 +271,21 @@ public class Main {
         }
     }
 
+    public static Boolean askForSpotify(Scanner scanner){
+        while (true){
+            cw.write("\nDo you want to use Spotify service?(yes/no)\n");
+            String userOption = scanner.nextLine();
+            if (userOption.toLowerCase().equals("yes")){
+                return true;
+            } else if(userOption.toLowerCase().equals("no")){
+                return false;
+            } else{
+                cw.write("\nWrong answer :c");
+                continue;
+            }
+        }
+    }
+
     public static void main(String[] args){
         List<Song> songList = new ArrayList<Song>();
         List<Cd> cdList = new ArrayList<Cd>();
@@ -281,10 +296,12 @@ public class Main {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Menu menu = new Menu();
 
-        clearScreen();
 
+        clearScreen();
         Boolean logging = askForLog(scanner);
         addOptions(menu);
+
+        Boolean isSpotify = askForSpotify(scanner);
 
         while(true){
             clearScreen();
