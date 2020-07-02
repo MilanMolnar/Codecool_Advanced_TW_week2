@@ -13,7 +13,7 @@ public class PrevActivity implements Activity {
 
     @Override
     public void activity(Boolean bool) {
-        if(song.isEmpty()) {
+        if(!song.equals("")) {
             cw.write("The prev " + song + "is coming");
             if (bool) {
                 log.write("The prev " + song + "is coming");
