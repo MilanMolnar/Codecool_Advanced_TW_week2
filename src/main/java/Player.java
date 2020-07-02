@@ -28,8 +28,6 @@ public class Player {
     public Player(){}
 
     public void next(){
-        System.out.println("current: " + currentIndex);
-        System.out.println("size: " + cd.getTracks().size() );
         if(currentIndex == cd.getTracks().size()-1){
             System.out.println(cd.getTracks().size());
             currentIndex = 0;
@@ -39,7 +37,7 @@ public class Player {
             currentIndex = currentIndex +1;
             song = cd.getTracks().get(currentIndex).getTitle();
         }
-        if(Playermode.SPOTIFY == pm){
+        if(Playermode.CD == pm){
             NextActivity next = new NextActivity(cw,song);
             next.activity(bool);
         }else{
@@ -57,7 +55,7 @@ public class Player {
             currentIndex = currentIndex +1;
             song = cd.getTracks().get(currentIndex).getTitle();
         }
-        if(Playermode.SPOTIFY == pm){
+        if(Playermode.CD == pm){
             PrevActivity prev = new PrevActivity(cw,song);
             prev.activity(bool);
         }else{
@@ -107,7 +105,7 @@ public class Player {
     }
     public void start(){
         String song;
-        if(Playermode.SPOTIFY == pm){
+        if(Playermode.CD == pm){
             song = cd.getTracks().get(currentIndex).getTitle();
             StartActivity start = new StartActivity(cw,song);
             start.activity(bool);
